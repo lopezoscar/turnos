@@ -2,7 +2,7 @@ var APP = function(){
 
     var reservas = {};
 
-    function createItem(hour){
+    function createItem(hour,column){
 
         var item = $('<li class="list-group-item"></li>');
         item.attr("data-hour",hour);
@@ -47,13 +47,15 @@ var APP = function(){
         $(row).append(divActions);
 
         $(item).append(row);
-        $("#hoursList").append(item);
+        $("."+column).append(item);
     }
 
     function crearHoras(){
         for(var i = 9; i < 23; i++){
-            createItem(i+":00");
-            createItem(i+":30");
+
+            var column = i < 16 ? "A" : "B";
+            createItem(i+":00",column);
+            createItem(i+":30",column);
             reservas[i+":00"] = { reservado: false };
             reservas[i+":30"] = { reservado: false };
         }
